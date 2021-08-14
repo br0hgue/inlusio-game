@@ -2,36 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : CharacterStat
 {
-    public Stat damage;
-    public int MaxHealth = 100;
-    public int CurrentHealth { get; set; }
     public HealthBarScript healthBar;
 
     void Start()
     {
-        CurrentHealth = MaxHealth;
         healthBar.SetHealth(MaxHealth);
     }
-     
-    void Update()
+    
+    public override void TakeDamage(int damage)
     {
-        
-    }
-
-    public void TakeDamage(int damage)
-    {
-        CurrentHealth -= damage;
-
-        if (CurrentHealth <= 0)
-        {
-            Die();
-            Debug.Log("died");
-        }
+        base.TakeDamage(damage);
         healthBar.SetHealth(CurrentHealth);
     }
-    void Die()
+    override public void Die()
     {
         Destroy(gameObject);
         //show death screen
