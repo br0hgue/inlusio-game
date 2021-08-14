@@ -19,7 +19,7 @@ public class CharacterStat : MonoBehaviour
         
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
 
         CurrentHealth -= damage;
@@ -34,7 +34,7 @@ public class CharacterStat : MonoBehaviour
         }
     }
 
-    void Die()
+    public virtual void Die()
     {
         Destroy(gameObject);
     }
