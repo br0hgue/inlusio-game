@@ -12,13 +12,14 @@ public class thirdPersonMovement : MonoBehaviour
     Vector3 velocity;
     private bool GroundedPlayer;
     public float jumpHeight = 2.0f;
+    //gravity MUST be a negative number for the player to fall down
     public  float gravity = -9.81f;
     public Transform cam;
     
 
     void Update()
     {
-        
+        //get the inputs as WASD
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
@@ -33,14 +34,13 @@ public class thirdPersonMovement : MonoBehaviour
             velocity.y = 0f;
             
         }
-
+        // if we're moving
         if (direction.magnitude >= 0.1)
         {
-            
+            // get the direction of movement with a tangent and add the angle of the camera
             float TargetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            //smoothing the motion
+            //smoothing the motion, basically an interpolation
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TargetAngle, ref turnSmoothVelocity, TurnSmoothTime);
-
             //the rotation of the player
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             //make a vector
