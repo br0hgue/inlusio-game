@@ -15,10 +15,11 @@ public class EnemyFollow : MonoBehaviour
 
     void Start()
     {
+        //get the target
         target = PlayerManager.instance.player.transform;
 
         agent = GetComponent<NavMeshAgent>();
-        Debug.Log('1');
+        //Debug.Log('1');
     }
 
     // Update is called once per frame
@@ -41,16 +42,18 @@ public class EnemyFollow : MonoBehaviour
 
         if (distance <= visionRads)
         {
-            
+            //walk there
             agent.SetDestination(target.position);
             if (distance <= agent.stoppingDistance)
             {
+                //not ideal methood but it works
                 enemy = GameObject.Find("Enemy").GetComponent<CharacterStat>();
                 print(enemy);
                 CharacterStat character = GetComponent<CharacterStat>();
                 int damage = enemy.damage.GetValue();
-                print(damage);
+                //print(damage);
                 if (attackCooldown < 0f)
+                    //insert the animation here
                     Attack(damage);
 
             }
@@ -58,6 +61,7 @@ public class EnemyFollow : MonoBehaviour
     }
     void Attack(int damage)
     {
+        //or put the animation here, i guess here makes more sense
         PlayerStats playerhealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
 
         playerhealth.TakeDamage(damage);
@@ -65,6 +69,7 @@ public class EnemyFollow : MonoBehaviour
     }
     private void OnDrawGizmosSelected()
     {
+        //this is just for the editor
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, visionRads);
     }
