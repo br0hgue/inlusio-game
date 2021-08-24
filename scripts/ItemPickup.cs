@@ -7,7 +7,7 @@ public class ItemPickup : MonoBehaviour
     public Item item;
     void OnTriggerEnter(Collider collider)
     {
-        //important to note that it is ONLY for triggers, not usual objects
+        /*important to note that it is ONLY for triggers, not usual objects so ALL items must be cathegorized as triggers unless we interacct with them in a different way*/
         
         if (collider.gameObject.tag == "Player")
         {
