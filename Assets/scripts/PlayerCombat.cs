@@ -9,8 +9,6 @@ public class PlayerCombat : MonoBehaviour
     public LayerMask enemyLayers;
 
     private void Update()
-
-
     {
         if (Input.GetMouseButtonDown(0))
         {
