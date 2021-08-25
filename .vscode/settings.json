@@ -52,7 +52,7 @@
         "ProjectSettings/":true,
         "temp/":true,
         "Temp/":true,
-        "**/*.csproj":true
+        "**/*.csproj":false
     },
     "git.ignoreLimitWarning": true
 }
