@@ -51,10 +51,12 @@ ExportedObj/
 *.pidb.meta
 *.pdb.meta
 *.mdb.meta
+# the prefab thingy, it just does not make sense to save a prefab file describing it if we lose the prefab itself
 *.prefab/
 
 # Unity3D generated file on crash reports
 sysinfo.txt
+# we dont need to save the collabignore, i guess unity just regenerates it if we need to
 .collabignore
 # Builds
 *.apk
