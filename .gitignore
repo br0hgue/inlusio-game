@@ -78,7 +78,7 @@ crashlytics-build.properties
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode
 
 ### VisualStudioCode ###
-.vscode/*
+.vscode/
 *.code-workspace
 
 # Local History for Visual Studio Code
