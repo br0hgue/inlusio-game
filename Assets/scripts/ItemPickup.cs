@@ -7,7 +7,7 @@ public class ItemPickup : MonoBehaviour
     public Item item;
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag == "Player")
+        if (collider.gameObject.CompareTag("Player"))
         {
             PickupItem();
         }

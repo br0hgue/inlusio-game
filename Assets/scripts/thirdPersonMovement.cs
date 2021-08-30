@@ -15,12 +15,19 @@ public class thirdPersonMovement : MonoBehaviour
     public  float gravity = -9.81f;
     public Transform cam;
     
+    Animator animator;
+
+    void Start()
+    {
+        animator = GetComponentInChildren<Animator>();
+    }
 
     void Update()
     {
         
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
+        
 
         GroundedPlayer = controller.isGrounded;
         
@@ -37,8 +44,11 @@ public class thirdPersonMovement : MonoBehaviour
         if (direction.magnitude >= 0.1)
         {
             
+            animator.SetBool("isMoving", true);
+
             float TargetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             //smoothing the motion
+
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TargetAngle, ref turnSmoothVelocity, TurnSmoothTime);
 
             //the rotation of the player
@@ -50,7 +60,10 @@ public class thirdPersonMovement : MonoBehaviour
 
             
             
+        } else if (direction.magnitude < 0.1){
+            animator.SetBool("isMoving", false);
         }
+
 
         //dear god it took so long to make this
         if (Input.GetButtonDown("Jump") && GroundedPlayer)
