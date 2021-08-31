@@ -64,6 +64,7 @@ sysinfo.txt
 *.unitypackage
 *.blend
 *.blend[1-9]
+*.anim*
 
 # Crashlytics generated file
 crashlytics-build.properties

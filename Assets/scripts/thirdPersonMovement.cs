@@ -25,9 +25,15 @@ public class thirdPersonMovement : MonoBehaviour
     void Update()
     {
         
+
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         
+        bool hasHorizontalInput = !Mathf.Approximately(horizontal, 0f);
+        bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
+        bool isWalking = hasHorizontalInput || hasVerticalInput;
+	//Don't forget to add an isMoving bool inside your Animator
+        animator.SetBool("isMoving", isWalking);
 
         GroundedPlayer = controller.isGrounded;
         
@@ -44,8 +50,7 @@ public class thirdPersonMovement : MonoBehaviour
         if (direction.magnitude >= 0.1)
         {
             
-            animator.SetBool("isMoving", true);
-
+            
             float TargetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             //smoothing the motion
 
@@ -70,10 +75,16 @@ public class thirdPersonMovement : MonoBehaviour
         {
             velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
             print(velocity.y);
+            animator.SetBool("isJumping", true);
         }
-        // apply gravity
+
+       
+        
+        
+        //for the love of god DONT USE THIS
+        
         velocity.y += gravity * Time.deltaTime;
-        // move upwards
+        
         controller.Move(velocity * Time.deltaTime);
     }
 }
