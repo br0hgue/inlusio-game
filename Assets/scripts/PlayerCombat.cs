@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -15,28 +16,34 @@ public class PlayerCombat : MonoBehaviour
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        attackCooldown = 0f;
 
     }
     private void Update()
     {
         attackCooldown -= Time.deltaTime;
 
-        if (Input.GetMouseButtonDown(0) && attackCooldown <= 0f)
+        
+
+        if (Input.GetMouseButtonDown(0) && attackCooldown <= 0f && !EventSystem.current.IsPointerOverGameObject())
         {
             Attack();
             hasAttacked = false;
-            attackCooldown = 1.4f;
+            animator.SetBool("isAttacking", true);
+            attackCooldown = .7f;
+        }
+
+        if (attackCooldown <= .5f){
+            animator.SetBool("isAttacking", false);
         }
 
         if (attackCooldown > 0f){
             hasAttacked = true;
-            animator.SetBool("isAttacking", hasAttacked);
         } 
             //Debug.Log(attackCooldown);
     }
 
     void Attack()
-
     {
         //this is so bad but it works
         GameObject Player = GameObject.Find("Player");

@@ -18,7 +18,7 @@ public class EnemyFollow : MonoBehaviour
         target = PlayerManager.instance.player.transform;
 
         agent = GetComponent<NavMeshAgent>();
-        Debug.Log('1');
+        //Debug.Log('1');
     }
 
     // Update is called once per frame
@@ -46,10 +46,10 @@ public class EnemyFollow : MonoBehaviour
             if (distance <= agent.stoppingDistance)
             {
                 enemy = GameObject.Find("Enemy").GetComponent<CharacterStat>();
-                print(enemy);
+                
                 CharacterStat character = GetComponent<CharacterStat>();
                 int damage = enemy.damage.GetValue();
-                print(damage);
+                
                 if (attackCooldown < 0f)
                     Attack(damage);
 
