@@ -7,13 +7,32 @@ public class PlayerCombat : MonoBehaviour
     public Transform attackpoint;
     public float attackRange = 1f;
     public LayerMask enemyLayers;
+    Animator animator;
+    bool hasAttacked;
+    float attackSpeed = 1f;
+    float attackCooldown = 1.4f;
+    
+    void Start()
+    {
+        animator = GetComponentInChildren<Animator>();
 
+    }
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        attackCooldown -= Time.deltaTime;
+
+        if (Input.GetMouseButtonDown(0) && attackCooldown <= 0f)
         {
             Attack();
+            hasAttacked = false;
+            attackCooldown = 1.4f;
         }
+
+        if (attackCooldown > 0f){
+            hasAttacked = true;
+            animator.SetBool("isAttacking", hasAttacked);
+        } 
+            //Debug.Log(attackCooldown);
     }
 
     void Attack()
@@ -28,8 +47,10 @@ public class PlayerCombat : MonoBehaviour
         foreach (Collider enemy in hitenemies)
         {
             enemy.GetComponent<CharacterStat>().TakeDamage(damage);
-            Debug.Log(damage);
+            //Debug.Log(damage);
         }
+
+        
 
         
     }

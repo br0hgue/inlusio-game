@@ -9,12 +9,17 @@ public class thirdPersonMovement : MonoBehaviour
     public float speed = 6f;
     public float TurnSmoothTime = 0.1f;
     float turnSmoothVelocity;
+    Vector3 moveDirec;
     Vector3 velocity;
     private bool GroundedPlayer;
+    private bool FallingPlayer;
     public float jumpHeight = 2.0f;
     public  float gravity = -9.81f;
     public Transform cam;
-    
+    public Transform groundcheck;
+    public LayerMask groundlayer;
+    public float grounddistance;
+
     Animator animator;
 
     void Start()
@@ -35,7 +40,9 @@ public class thirdPersonMovement : MonoBehaviour
 	//Don't forget to add an isMoving bool inside your Animator
         animator.SetBool("isMoving", isWalking);
 
-        GroundedPlayer = controller.isGrounded;
+        GroundedPlayer = Physics.CheckSphere(groundcheck.position, grounddistance, groundlayer);
+
+        FallingPlayer = Physics.CheckSphere(groundcheck.position, grounddistance + 0.2f, groundlayer);
         
 
         Vector3 direction = new Vector3(horizontal, 0f , vertical).normalized;
@@ -43,7 +50,7 @@ public class thirdPersonMovement : MonoBehaviour
         
         if (GroundedPlayer && velocity.y < 0)
         {
-            velocity.y = 0f;
+            velocity.y = -0f;
             
         }
 
@@ -59,7 +66,10 @@ public class thirdPersonMovement : MonoBehaviour
             //the rotation of the player
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             //make a vector
-            Vector3 moveDirec = Quaternion.Euler(0f, TargetAngle, 0f) * Vector3.forward;
+            moveDirec = Quaternion.Euler(0f, TargetAngle, 0f) * Vector3.forward;
+
+
+
             //actually move 
             controller.Move(moveDirec.normalized * speed * Time.deltaTime);
 
@@ -74,17 +84,24 @@ public class thirdPersonMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && GroundedPlayer)
         {
             velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
-            print(velocity.y);
-            animator.SetBool("isJumping", true);
-        }
+            
+            animator.SetBool("isJumping", true);}
 
-       
-        
-        
-        //for the love of god DONT USE THIS
-        
+        /*if (animator.GetBool("isJumping") && FallingPlayer && !Input.GetButtonDown("Jump")){
+            Debug.Log("play falling animation");
+        } */
+
+        if (FallingPlayer && !GroundedPlayer && !Input.GetButtonDown("Jump") && velocity.y < 0f)
+        {
+          animator.SetBool("isJumping", false);
+          animator.SetBool("isFalling", true);
+            Debug.Log("falling ");
+        } else animator.SetBool("isFalling", false);
+
         velocity.y += gravity * Time.deltaTime;
-        
+         //if (velocity.y > 0f)
+             //{Debug.Log(velocity.y);}
+
         controller.Move(velocity * Time.deltaTime);
     }
 }
