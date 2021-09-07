@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerStats : CharacterStat
 {
+    Animator animator;
     public HealthBarScript healthBar;
 
     void Start()
     {
         healthBar.SetHealth(MaxHealth);
+        animator = GetComponentInChildren<Animator>();
     }
     
     public override void TakeDamage(int damage)
@@ -18,7 +20,8 @@ public class PlayerStats : CharacterStat
     }
     override public void Die()
     {
-        Destroy(gameObject);
+        animator.SetBool("isDying", true);
+        Destroy(gameObject, 3.13f);
         //show death screen
     }
 }
