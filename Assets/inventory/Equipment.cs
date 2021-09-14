@@ -6,8 +6,11 @@ using UnityEngine;
 public class Equipment : Item
 {
     public EquipmentSlot equipmentslot;
-    public int damage;
-    public int armor;
+
+    public MeshRenderer mesh;
+    
+    public int damageMod;
+    public int armorMod;
 
     public override void Use()
     {

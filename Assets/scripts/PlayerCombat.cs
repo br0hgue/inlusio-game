@@ -27,7 +27,7 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && attackCooldown <= 0f && !EventSystem.current.IsPointerOverGameObject())
         {
-            Attack();
+            Invoke("Attack", .33f);
             hasAttacked = false;
             animator.SetBool("isAttacking", true);
             attackCooldown = .7f;

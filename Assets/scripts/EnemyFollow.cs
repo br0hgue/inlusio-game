@@ -9,6 +9,7 @@ public class EnemyFollow : MonoBehaviour
     Transform target;
     CharacterStat enemy;
     NavMeshAgent agent;
+    Animator animator;
     
 
     bool IsPlayerAlive = true;
@@ -16,7 +17,7 @@ public class EnemyFollow : MonoBehaviour
     void Start()
     {
         target = PlayerManager.instance.player.transform;
-
+        animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         //Debug.Log('1');
     }
@@ -25,6 +26,8 @@ public class EnemyFollow : MonoBehaviour
     void Update()
     {
       
+        
+
         if (IsPlayerAlive == false)
             return;
 
@@ -43,8 +46,12 @@ public class EnemyFollow : MonoBehaviour
         {
             
             agent.SetDestination(target.position);
+            animator.SetBool("isMoving", true);
+
             if (distance <= agent.stoppingDistance)
             {
+                animator.SetBool("isMoving", false);
+
                 enemy = GameObject.Find("Enemy").GetComponent<CharacterStat>();
                 
                 CharacterStat character = GetComponent<CharacterStat>();
@@ -54,7 +61,7 @@ public class EnemyFollow : MonoBehaviour
                     Attack(damage);
 
             }
-        }
+        } else animator.SetBool("isMoving", false);
     }
     void Attack(int damage)
     {

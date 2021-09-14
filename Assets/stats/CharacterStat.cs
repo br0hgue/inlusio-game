@@ -39,6 +39,5 @@ public class CharacterStat : MonoBehaviour
     public virtual void Die()
     {
         Destroy(gameObject);
-        //maybe we will do the neutralize thing here or we will do diferently to each class, then we will override it
     }
 }
