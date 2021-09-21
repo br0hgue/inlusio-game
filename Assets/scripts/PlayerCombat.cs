@@ -49,6 +49,7 @@ public class PlayerCombat : MonoBehaviour
         GameObject Player = GameObject.Find("Player");
         PlayerStats PlayerDamage = Player.GetComponent<PlayerStats>();
         int damage = PlayerDamage.damage.GetValue();
+        Debug.Log(damage);
         //attack animation here
         Collider [] hitenemies = Physics.OverlapSphere(attackpoint.position, attackRange, enemyLayers);
         foreach (Collider enemy in hitenemies)

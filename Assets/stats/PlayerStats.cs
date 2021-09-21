@@ -6,6 +6,7 @@ public class PlayerStats : CharacterStat
 {
     Animator animator;
     public HealthBarScript healthBar;
+    
 
     void Start()
     {
@@ -15,6 +16,9 @@ public class PlayerStats : CharacterStat
     
     public override void TakeDamage(int damage)
     {
+        damage -= armor.GetValue();
+        //Debug.Log(damage);
+        damage = Mathf.Clamp(damage, 0, int.MaxValue);
         base.TakeDamage(damage);
         healthBar.SetHealth(CurrentHealth);
     }

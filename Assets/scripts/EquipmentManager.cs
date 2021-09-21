@@ -14,6 +14,8 @@ public class EquipmentManager : MonoBehaviour
 
     #endregion
 
+    public PlayerStats playerstat;
+
     public delegate void onEquipmentChanged (Equipment newItem, Equipment oldItem);
     public onEquipmentChanged OnEquipmentChanged;
     public SkinnedMeshRenderer targetMesh;
@@ -33,20 +35,23 @@ public class EquipmentManager : MonoBehaviour
         Equipment oldItem = null;
         if (currentEquipment[slotIndex] != null)
         {
+            int playerDamage = playerstat.damage.GetValue();
+            playerDamage += newItem.damageMod;
+            Debug.Log(playerDamage);
             oldItem = currentEquipment[slotIndex];
 
             Inventory.instance.Add(oldItem);
         }
 
-        Transform bone = gameObject.transform.Find("metarig/spine/spine.002/spine.003/shoulder.L/upper_arm.L/forearm.L/hand.L");
+        //Transform bone = gameObject.transform.Find("metarig/spine/spine.002/spine.003/shoulder.L/upper_arm.L/forearm.L/hand.L");
 
         currentEquipment[slotIndex] = newItem;
-        MeshRenderer newMesh = Instantiate<MeshRenderer>(newItem.mesh);
+        /* MeshRenderer newMesh = Instantiate<MeshRenderer>(newItem.mesh);
         newMesh.transform.parent = bone;
         newMesh.gameObject.transform.localPosition = Vector3.zero;
         newMesh.transform.localRotation = Quaternion.identity;
         newMesh.transform.localScale = Vector3.one;
-        currentMeshes[slotIndex] = newMesh;
+        currentMeshes[slotIndex] = newMesh;*/
 
     }
     public void Unequip(int slotIndex){
@@ -58,6 +63,9 @@ public class EquipmentManager : MonoBehaviour
                 //}
                 Equipment oldItem = currentEquipment[slotIndex];
                 Inventory.instance.Add(oldItem);
+                int playerDamage = playerstat.damage.baseValue;
+                playerDamage -= oldItem.damageMod;
+
                 currentEquipment[slotIndex] = null;
 
             }

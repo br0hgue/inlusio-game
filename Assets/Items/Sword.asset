@@ -17,5 +17,5 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 20ba4ef76328f48eea1653fa02662395, type: 3}
   equipmentslot: 0
   mesh: {fileID: 8961172090150853851, guid: 15a3900c60e3d41d097440ead8f92399, type: 3}
-  damageMod: 10
+  damageMod: 5000
   armorMod: 0
