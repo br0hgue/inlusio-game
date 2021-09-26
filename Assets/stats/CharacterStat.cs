@@ -32,7 +32,7 @@ public class CharacterStat : MonoBehaviour
         {
             
             Die();
-            Debug.Log("died");
+            //Debug.Log("died");
         }
     }
 

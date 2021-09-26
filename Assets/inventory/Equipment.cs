@@ -7,7 +7,7 @@ public class Equipment : Item
 {
     public EquipmentSlot equipmentslot;
 
-    public MeshRenderer mesh;
+    //public MeshRenderer mesh;
     
     public int damageMod;
     public int armorMod;

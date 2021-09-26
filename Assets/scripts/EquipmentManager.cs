@@ -18,14 +18,14 @@ public class EquipmentManager : MonoBehaviour
 
     public delegate void onEquipmentChanged (Equipment newItem, Equipment oldItem);
     public onEquipmentChanged OnEquipmentChanged;
-    public SkinnedMeshRenderer targetMesh;
+    //public SkinnedMeshRenderer targetMesh;
     Equipment[] currentEquipment;
-    MeshRenderer[] currentMeshes; 
+    //MeshRenderer[] currentMeshes; 
     private void Start()
     {
         int numberSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
         currentEquipment = new Equipment[numberSlots];
-        currentMeshes = new MeshRenderer[numberSlots];
+        //currentMeshes = new MeshRenderer[numberSlots];
          
     }
     public void Equip(Equipment newItem)
@@ -35,9 +35,9 @@ public class EquipmentManager : MonoBehaviour
         Equipment oldItem = null;
         if (currentEquipment[slotIndex] != null)
         {
-            int playerDamage = playerstat.damage.GetValue();
-            playerDamage += newItem.damageMod;
-            Debug.Log(playerDamage);
+            //playerstat.damage.baseValue += newItem.damageMod;
+            //playerstat.armor.baseValue += newItem.armorMod;
+            //Debug.Log(playerstat.damage.GetValue());
             oldItem = currentEquipment[slotIndex];
 
             Inventory.instance.Add(oldItem);
@@ -63,8 +63,9 @@ public class EquipmentManager : MonoBehaviour
                 //}
                 Equipment oldItem = currentEquipment[slotIndex];
                 Inventory.instance.Add(oldItem);
-                int playerDamage = playerstat.damage.baseValue;
-                playerDamage -= oldItem.damageMod;
+                
+                //playerstat.damage.baseValue -= oldItem.damageMod;
+                //playerstat.armor.baseValue -= oldItem.armorMod;
 
                 currentEquipment[slotIndex] = null;
 
@@ -76,6 +77,5 @@ public class EquipmentManager : MonoBehaviour
         {
             Unequip(i);
         }
-    }
-
+    }    
 }

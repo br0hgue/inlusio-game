@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemAmount: 1
   name: armor of bruh
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: e55fc09e6e1824c5fbb17ff70c5df29c, type: 3}
   equipmentslot: 1
-  mesh: {fileID: 0}
   damageMod: 0
   armorMod: 100
