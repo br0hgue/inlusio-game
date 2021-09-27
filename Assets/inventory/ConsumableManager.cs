@@ -16,6 +16,6 @@ public class ConsumableManager : MonoBehaviour
     public PlayerStats playerstat;
 
         public void Consume(int healthmod){
-            playerstat.CurrentHealth += healthmod;
+            playerstat.addHealth(healthmod);
         }
 }

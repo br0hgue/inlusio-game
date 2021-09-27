@@ -32,15 +32,16 @@ public class EquipmentManager : MonoBehaviour
     { 
         int slotIndex = (int)newItem.equipmentslot;
 
+        playerstat.damage.baseValue += newItem.damageMod;
+        playerstat.armor.baseValue += newItem.armorMod;
+
         Equipment oldItem = null;
         if (currentEquipment[slotIndex] != null)
         {
-            //playerstat.damage.baseValue += newItem.damageMod;
-            //playerstat.armor.baseValue += newItem.armorMod;
             //Debug.Log(playerstat.damage.GetValue());
             oldItem = currentEquipment[slotIndex];
 
-            Inventory.instance.Add(oldItem);
+            //Inventory.instance.Add(oldItem);
         }
 
         //Transform bone = gameObject.transform.Find("metarig/spine/spine.002/spine.003/shoulder.L/upper_arm.L/forearm.L/hand.L");
@@ -62,10 +63,10 @@ public class EquipmentManager : MonoBehaviour
                     //Destroy(currentMeshes[slotIndex].gameObject);
                 //}
                 Equipment oldItem = currentEquipment[slotIndex];
-                Inventory.instance.Add(oldItem);
+                //Inventory.instance.Add(oldItem);
                 
-                //playerstat.damage.baseValue -= oldItem.damageMod;
-                //playerstat.armor.baseValue -= oldItem.armorMod;
+                playerstat.damage.baseValue -= oldItem.damageMod;
+                playerstat.armor.baseValue -= oldItem.armorMod;
 
                 currentEquipment[slotIndex] = null;
 

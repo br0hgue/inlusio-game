@@ -15,11 +15,14 @@ public class CharacterStat : MonoBehaviour
         
     }
 
-    void Update()
+    public void Update()
     {
-        
+    
     }
 
+    public void addHealth(int health){ 
+             CurrentHealth += health;
+        }
     public virtual void TakeDamage(int damage)
     {
         
