@@ -2,18 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
-
+using TMPro;
 public class inventorySlot : MonoBehaviour
 {
     public Image icon;
     // Start is called before the first frame update
-    Item item;
+    inventSlot item;
+    Item _item;
+    Inventory inventory;
 
-    public void AddItem(Item newItem)
+    Dictionary <inventSlot, GameObject> itemsDisplayed = new Dictionary<inventSlot, GameObject>();
+
+    private void Start() {
+        inventory = Inventory.instance;
+    }
+
+    public void AddItem(inventSlot newItem)
     { 
         item = newItem;
-        icon.sprite = item.icon;
+        icon.sprite = newItem.item.icon;
         icon.enabled = true;
+        
+        for (int i = 0; i < inventory.items.Count; i++)
+        {
+            if(itemsDisplayed.ContainsKey(inventory.items[i])){
+                   this.GetComponentInChildren<TextMeshProUGUI>().text = inventory.items[i].amount.ToString("n0");
+                }
+            else{ 
+            var obj = Instantiate(inventory.items[i].item._object, transform); 
+            this.GetComponentInChildren<TextMeshProUGUI>().text = inventory.items[i].amount.ToString("n0");
+            itemsDisplayed.Add(inventory.items[i], obj);
+            print(inventory.items[i].amount.ToString());}
+
+        }
 
     }
 
@@ -27,7 +48,7 @@ public class inventorySlot : MonoBehaviour
     {
         if (item != null)
         {
-            item.Use();
+            //item.Use();
         }
     }
 }

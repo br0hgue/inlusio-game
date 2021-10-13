@@ -10,7 +10,7 @@ public class PlayerCombat : MonoBehaviour
     public LayerMask enemyLayers;
     Animator animator;
     bool hasAttacked;
-    float attackSpeed = 1f;
+    //float attackSpeed = 1f;
     float attackCooldown = 1.4f;
     
     void Start()

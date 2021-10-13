@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "new Item", menuName = "Inventory/Item")]
 public class Item : ScriptableObject
 {
+    public GameObject _object;
     public int itemAmount = 1;
     new public string name = "new item";
     public Sprite icon = null;
@@ -17,7 +18,7 @@ public class Item : ScriptableObject
 
     public void RemoveFromInventory()
     {
-        Inventory.instance.Remove(this);
+        Inventory.instance.Remove(this, 1);
     }
 
 
