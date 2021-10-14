@@ -31,7 +31,7 @@ public class Inventory : MonoBehaviour
         bool hasItem = false;
         for (int i = 0; i < items.Count; i++)
         {
-            if(items[i].item == _item){
+            if(items[i].item == _item && items[i].item.item_type == 1){
                 items[i].AddAmount(_amount);
                 hasItem = true;
                 break;
@@ -57,7 +57,7 @@ public class Inventory : MonoBehaviour
     }
     public void Remove(Item item, int amount)
     {
-        items.Remove( new inventSlot(item, amount));     // Remove item from list
+        items.Remove(new inventSlot(item, amount));     // Remove item from list
 
         // Trigger callback
         if (onItemChangedCallback != null)

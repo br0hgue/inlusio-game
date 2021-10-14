@@ -7,7 +7,7 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     public GameObject _object;
-    public int itemAmount = 1;
+    public int item_type = 1;
     new public string name = "new item";
     public Sprite icon = null;
 

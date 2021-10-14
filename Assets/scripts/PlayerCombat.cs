@@ -9,7 +9,7 @@ public class PlayerCombat : MonoBehaviour
     public float attackRange = 1f;
     public LayerMask enemyLayers;
     Animator animator;
-    bool hasAttacked;
+    //bool hasAttacked;
     //float attackSpeed = 1f;
     float attackCooldown = 1.4f;
     
@@ -28,7 +28,7 @@ public class PlayerCombat : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && attackCooldown <= 0f && !EventSystem.current.IsPointerOverGameObject())
         {
             Invoke("Attack", .33f);
-            hasAttacked = false;
+            //hasAttacked = false;
             animator.SetBool("isAttacking", true);
             attackCooldown = .7f;
         }
@@ -38,7 +38,7 @@ public class PlayerCombat : MonoBehaviour
         }
 
         if (attackCooldown > 0f){
-            hasAttacked = true;
+            //hasAttacked = true;
         } 
             //Debug.Log(attackCooldown);
     }

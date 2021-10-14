@@ -10,6 +10,7 @@ public class inventorySlot : MonoBehaviour
     inventSlot item;
     Item _item;
     Inventory inventory;
+    public inventorySlot _slot;
 
     Dictionary <inventSlot, GameObject> itemsDisplayed = new Dictionary<inventSlot, GameObject>();
 
@@ -22,19 +23,6 @@ public class inventorySlot : MonoBehaviour
         item = newItem;
         icon.sprite = newItem.item.icon;
         icon.enabled = true;
-        
-        for (int i = 0; i < inventory.items.Count; i++)
-        {
-            if(itemsDisplayed.ContainsKey(inventory.items[i])){
-                   this.GetComponentInChildren<TextMeshProUGUI>().text = inventory.items[i].amount.ToString("n0");
-                }
-            else{ 
-            var obj = Instantiate(inventory.items[i].item._object, transform); 
-            this.GetComponentInChildren<TextMeshProUGUI>().text = inventory.items[i].amount.ToString("n0");
-            itemsDisplayed.Add(inventory.items[i], obj);
-            print(inventory.items[i].amount.ToString());}
-
-        }
 
     }
 
@@ -48,7 +36,7 @@ public class inventorySlot : MonoBehaviour
     {
         if (item != null)
         {
-            //item.Use();
+            item.item.Use();
         }
     }
 }

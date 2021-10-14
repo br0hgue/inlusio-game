@@ -52,23 +52,30 @@ public class EnemyFollow : MonoBehaviour
             {
                 animator.SetBool("isMoving", false);
 
-                enemy = GameObject.Find("Enemy").GetComponent<CharacterStat>();
-                
-                CharacterStat character = GetComponent<CharacterStat>();
-                int damage = enemy.damage.GetValue();
                 
                 if (attackCooldown < 0f)
-                    Attack(damage);
+                    Attack();
+                    //animator.SetBool("isattacking", false);
+                    //print (attackCooldown);
 
+                if (attackCooldown == 0f){
+                    animator.SetBool("isattacking", false);
+                    print(animator.GetBool("isattacking"));
+                }
             }
         } else animator.SetBool("isMoving", false);
     }
-    void Attack(int damage)
+    void Attack()
     {
+        enemy = GameObject.Find("Enemy").GetComponent<CharacterStat>();
+                
+        CharacterStat character = GetComponent<CharacterStat>();
+        int damage = enemy.damage.GetValue();
         PlayerStats playerhealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
-
+        animator.SetBool("isattacking", true);
         playerhealth.TakeDamage(damage);
         attackCooldown = 1f;
+       
     }
     private void OnDrawGizmosSelected()
     {

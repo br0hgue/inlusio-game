@@ -42,10 +42,12 @@ public class inventoryUI : MonoBehaviour
                 }
                 else{
                     var obj = Instantiate(inventory.items[i].item._object, transform); 
-                    this.GetComponentInChildren<TextMeshProUGUI>().text = inventory.items[i].amount.ToString("n0");
                     itemsDisplayed.Add(inventory.items[i], obj);
                     print(inventory.items[i].amount.ToString());
                 }*/
+                if (inventory.items[i].amount >1){
+                slots[i].GetComponentInChildren<TextMeshProUGUI>().enabled = true;
+                slots[i].GetComponentInChildren<TextMeshProUGUI>().text = inventory.items[i].amount.ToString("n0");}
             } else
             {
                 slots[i].ClearSlot();

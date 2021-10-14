@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: armor of bruh
   m_EditorClassIdentifier: 
   _object: {fileID: 7089102068461441059, guid: 359f9ec779fcf4942993e52d113bf212, type: 3}
-  itemAmount: 1
+  item_type: 2
   name: armor of bruh
   icon: {fileID: 21300000, guid: e55fc09e6e1824c5fbb17ff70c5df29c, type: 3}
   equipmentslot: 1
