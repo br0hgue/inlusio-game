@@ -21,11 +21,19 @@ public class Inventory : MonoBehaviour
     
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
+    public inventSlot slotItem;
+    public inventSlot currentItem;
+    public inventSlot oldSlotitem;
 
     public int space = 20;
 
     public List<inventSlot> items = new List<inventSlot>();
-
+    private void Update() {
+         if(Input.GetMouseButtonDown(1)){
+            //print("eggs");
+            currentItem.item.Use();
+        }
+    }
     public bool Add(Item _item, int _amount)
     {
         bool hasItem = false;

@@ -18,7 +18,7 @@ public class Item : ScriptableObject
 
     public virtual void Unhand(){
         //take out the item that was previously
-        Debug.Log("took out");
+        //Debug.Log("took out");
     }
     public virtual void Use()
     {

@@ -8,6 +8,7 @@ public class inventorySlot : MonoBehaviour
     public Image icon;
     // Start is called before the first frame update
     inventSlot item;
+    
     Item _item;
     Inventory inventory;
     public inventorySlot _slot;
@@ -26,6 +27,7 @@ public class inventorySlot : MonoBehaviour
             if(scrollPosition >= 7){
                 scrollPosition = 1;
             }
+            Selected();
             
         }
         if(Mathf.RoundToInt(Input.mouseScrollDelta.y) <= -1){
@@ -33,8 +35,11 @@ public class inventorySlot : MonoBehaviour
             if(scrollPosition <= 0){
                 scrollPosition = 6;
             }
-        }
          Selected();
+        }
+
+       
+        
     }
     void Selected(){
         if (_slot.name == "InventorySlot ("+scrollPosition+")"){
@@ -44,9 +49,25 @@ public class inventorySlot : MonoBehaviour
             
             if (item != null){
                 item.item.inHand();
-            } else {
+
+                if(item.item.item_type != 3){
+                    Inventory.instance.currentItem.item.Unhand();
+                    print("1");
+                }
+                Inventory.instance.currentItem = item;
+                //print(olditem);
+            } else if (item == null)
+            {
+                print("2");
+                if (Inventory.instance.currentItem == null){
+                    return;
+                    }
                 //remove previous item
-                EquipmentManager.instance.Unequip(0);
+                
+                Inventory.instance.currentItem.item.Unhand();
+                
+                Inventory.instance.currentItem = null;
+                    
 
             }
         } else {
@@ -75,7 +96,7 @@ public class inventorySlot : MonoBehaviour
         {
             item.item.Use();
         } else {
-            print ("bruh");
+            //print ("bruh");
         }
         
     }

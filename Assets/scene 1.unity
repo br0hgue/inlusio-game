@@ -2288,8 +2288,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 659618176}
-  m_LocalRotation: {x: 0.46075347, y: 0.005886179, z: -0.0030558505, w: 0.8875033}
-  m_LocalPosition: {x: 0, y: -0.00000047683716, z: 0}
+  m_LocalRotation: {x: 0.46075353, y: 0.005886232, z: -0.0030558778, w: 0.8875034}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 766093590}
@@ -4063,8 +4063,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.4779761, y: 0.0033323374, z: -0.0018130356, w: 0.8783646}
-  m_LocalPosition: {x: 1.9601501, y: 6, z: -3.0149121}
+  m_LocalRotation: {x: 0.4779768, y: 0.003025377, z: -0.0016465725, w: 0.87836576}
+  m_LocalPosition: {x: 1.9601603, y: 6, z: -3.0135124}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4879,24 +4879,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCooldown: 2.5
   visionRads: 10
---- !u!114 &1258541100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258541097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f897887dd49014b0786e1c30dc4eed8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage:
-    baseValue: 10
-  armor:
-    baseValue: 0
-  MaxHealth: 100
-  CurrentHealth: 0
 --- !u!136 &1258541103
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4911,6 +4893,24 @@ CapsuleCollider:
   m_Height: 4.140243
   m_Direction: 1
   m_Center: {x: 0, y: 1.6, z: 0.2}
+--- !u!114 &1258541104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258541097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 783144416cf95497e9da89075dd5da70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage:
+    baseValue: 10
+  armor:
+    baseValue: 0
+  MaxHealth: 100
+  CurrentHealth: 0
 --- !u!1 &1304571858
 GameObject:
   m_ObjectHideFlags: 0
@@ -5798,8 +5798,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600729855}
-  m_LocalRotation: {x: 0.47595227, y: 0.006985141, z: -0.0037803736, w: 0.87943524}
-  m_LocalPosition: {x: 0, y: -0.00000047683716, z: 0}
+  m_LocalRotation: {x: 0.47595164, y: 0.007127336, z: -0.0038573302, w: 0.8794341}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 879829044}
@@ -7113,8 +7113,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1945683912}
-  m_LocalRotation: {x: 0.47797608, y: 0.003332577, z: -0.0018134747, w: 0.8783647}
-  m_LocalPosition: {x: 0, y: -0.00000047683716, z: 0}
+  m_LocalRotation: {x: 0.4779767, y: 0.0030251716, z: -0.0016461951, w: 0.8783658}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 819152642}
@@ -7363,6 +7363,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7887a9f7a3ab14b34b3f5590f059c74f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotItem:
+    item: {fileID: 0}
+    amount: 0
+  currentItem:
+    item: {fileID: 0}
+    amount: 0
+  oldSlotitem:
+    item: {fileID: 0}
+    amount: 0
   space: 6
   items: []
 --- !u!114 &2002052386

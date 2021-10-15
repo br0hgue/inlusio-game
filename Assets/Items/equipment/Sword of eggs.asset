@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sword of eggs
   m_EditorClassIdentifier: 
   _object: {fileID: 1744290344905093334, guid: 781333f3c4f714376807891b714e425c, type: 3}
-  item_type: 2
+  item_type: 3
   name: Sword of eggs
   icon: {fileID: 21300000, guid: e55fc09e6e1824c5fbb17ff70c5df29c, type: 3}
   equipmentslot: 0

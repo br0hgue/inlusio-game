@@ -6,15 +6,13 @@ public class CharacterStat : MonoBehaviour
 {
     public Stat damage;
     public Stat armor;
-    Animator _animator;
+  
     public int MaxHealth = 100;
     public int CurrentHealth;
     
     public virtual void Awake()
     {
         CurrentHealth = MaxHealth;
-        _animator = gameObject.GetComponent<Animator>();
-        _animator.SetBool("isDying", false);
         
     }
 
@@ -44,7 +42,6 @@ public class CharacterStat : MonoBehaviour
 
     public virtual void Die()
     {
-        _animator.SetBool("isDying", true);
-        Destroy(gameObject, 3f);
+        Destroy(gameObject);
     }
 }

@@ -17,7 +17,17 @@ public class Equipment : Item
        // put in hand
         if (this.equipmentslot == EquipmentSlot.Weapon){
             EquipmentManager.instance.Equip(this);
-            Debug.Log("wooooo yeaaa baby");
+            //Debug.Log("wooooo yeaaa baby");
+
+        }
+    }
+
+    public override void Unhand()
+    {
+        base.Unhand();
+        if (this.equipmentslot == EquipmentSlot.Weapon){
+            EquipmentManager.instance.Unequip(0);
+            Debug.Log("unhanded");
 
         }
     }

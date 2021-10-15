@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-public class EnemyFollow : MonoBehaviour
+public class enemyScripts : MonoBehaviour
 {
     public float attackCooldown = 1f;
     public float visionRads = 10f;
