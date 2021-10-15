@@ -6,12 +6,15 @@ public class CharacterStat : MonoBehaviour
 {
     public Stat damage;
     public Stat armor;
+    Animator _animator;
     public int MaxHealth = 100;
-    public int CurrentHealth { get; set; }
+    public int CurrentHealth;
     
-    void Awake()
+    public virtual void Awake()
     {
         CurrentHealth = MaxHealth;
+        _animator = gameObject.GetComponent<Animator>();
+        _animator.SetBool("isDying", false);
         
     }
 
@@ -25,15 +28,15 @@ public class CharacterStat : MonoBehaviour
         }
     public virtual void TakeDamage(int damage)
     {
-        
+        damage -= armor.GetValue();
         damage = Mathf.Clamp(damage, 0, int.MaxValue);
         CurrentHealth -= damage;
+
 
         
 
         if (CurrentHealth <= 0)
         {
-            
             Die();
             //Debug.Log("died");
         }
@@ -41,6 +44,7 @@ public class CharacterStat : MonoBehaviour
 
     public virtual void Die()
     {
-        Destroy(gameObject);
+        _animator.SetBool("isDying", true);
+        Destroy(gameObject, 3f);
     }
 }

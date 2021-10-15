@@ -40,9 +40,18 @@ public class EquipmentManager : MonoBehaviour
         {
             //Debug.Log(playerstat.damage.GetValue());
             oldItem = currentEquipment[slotIndex];
-
+            playerstat.damage.baseValue -= oldItem.damageMod;
+            playerstat.armor.baseValue -= oldItem.armorMod;
             //Inventory.instance.Add(oldItem);
         }
+        /*
+        not sure if i will equip the items physically here or in Equipment.cs
+        
+        if(newItem.equipmentslot == EquipmentSlot.Weapon){
+            //equip physiscally
+            print("yay its a danger stick!");
+
+        }*/
 
         //Transform bone = gameObject.transform.Find("metarig/spine/spine.002/spine.003/shoulder.L/upper_arm.L/forearm.L/hand.L");
 
@@ -69,6 +78,10 @@ public class EquipmentManager : MonoBehaviour
                 playerstat.armor.baseValue -= oldItem.armorMod;
 
                 currentEquipment[slotIndex] = null;
+                if(oldItem.equipmentslot == EquipmentSlot.Weapon){
+                
+                print("the danger stick is no longer equipped");
+        }
 
             }
     }

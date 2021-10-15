@@ -11,6 +11,15 @@ public class Item : ScriptableObject
     new public string name = "new item";
     public Sprite icon = null;
 
+    public virtual void inHand(){
+        //when selected in hotbar put the item in the hand
+        Debug.Log("in hand");
+    }
+
+    public virtual void Unhand(){
+        //take out the item that was previously
+        Debug.Log("took out");
+    }
     public virtual void Use()
     {
         Debug.Log("used " + name);

@@ -10,12 +10,11 @@ public class EnemyFollow : MonoBehaviour
     CharacterStat enemy;
     NavMeshAgent agent;
     Animator animator;
-    
-
     bool IsPlayerAlive = true;
 
     void Start()
     {
+        enemy = GetComponent<CharacterStat>();
         target = PlayerManager.instance.player.transform;
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
@@ -26,8 +25,6 @@ public class EnemyFollow : MonoBehaviour
     void Update()
     {
       
-        
-
         if (IsPlayerAlive == false)
             return;
 
@@ -42,6 +39,10 @@ public class EnemyFollow : MonoBehaviour
 
         attackCooldown -= Time.deltaTime;
 
+        if (attackCooldown < 1f && attackCooldown > 0f ){
+            animator.SetBool("isAttacking", false);
+            //print("yes");
+        }
         if (distance <= visionRads)
         {
             
@@ -51,35 +52,31 @@ public class EnemyFollow : MonoBehaviour
             if (distance <= agent.stoppingDistance)
             {
                 animator.SetBool("isMoving", false);
-
-                
                 if (attackCooldown < 0f)
                     Attack();
                     //animator.SetBool("isattacking", false);
                     //print (attackCooldown);
 
-                if (attackCooldown == 0f){
-                    animator.SetBool("isattacking", false);
-                    print(animator.GetBool("isattacking"));
-                }
             }
         } else animator.SetBool("isMoving", false);
     }
     void Attack()
     {
-        enemy = GameObject.Find("Enemy").GetComponent<CharacterStat>();
-                
-        CharacterStat character = GetComponent<CharacterStat>();
+        Invoke("TruAttack", .75f);
+        animator.SetBool("isAttacking", true);
+        attackCooldown = 2.5f;
+       
+    }
+
+    void TruAttack(){
+        //CharacterStat character = GetComponent<CharacterStat>();
         int damage = enemy.damage.GetValue();
         PlayerStats playerhealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
-        animator.SetBool("isattacking", true);
         playerhealth.TakeDamage(damage);
-        attackCooldown = 1f;
-       
     }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, visionRads);
-    }
+    } 
 }

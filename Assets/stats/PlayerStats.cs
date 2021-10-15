@@ -8,8 +8,9 @@ public class PlayerStats : CharacterStat
     public HealthBarScript healthBar;
     
 
-    void Start()
+    public override void Awake()
     {
+        CurrentHealth = MaxHealth;
         healthBar.SetHealth(MaxHealth);
         animator = GetComponentInChildren<Animator>();
     }

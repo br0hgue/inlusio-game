@@ -12,13 +12,21 @@ public class Equipment : Item
     public int damageMod;
     public int armorMod;
 
+    public override void inHand()
+    {
+       // put in hand
+        if (this.equipmentslot == EquipmentSlot.Weapon){
+            EquipmentManager.instance.Equip(this);
+            Debug.Log("wooooo yeaaa baby");
+
+        }
+    }
     public override void Use()
     {
         base.Use();
         EquipmentManager.instance.Equip(this);
-        //RemoveFromInventory();
-        
     }
+
 }
 
 public enum EquipmentSlot
