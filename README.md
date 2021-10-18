@@ -1,6 +1,6 @@
 # inlusio
 
-An indie adventure game developed by two high school studends.
+An indie adventure game developed by me
 
 The game is based on [this](https://docs.unity3d.com/2019.4/Documentation/ScriptReference/) documentation along with many Brackeys tutorials.
 
