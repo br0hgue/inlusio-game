@@ -15,11 +15,13 @@ public class PlayerStats : CharacterStat
         animator = GetComponentInChildren<Animator>();
     }
     
-    public override void TakeDamage(int damage)
-    {
-        damage -= armor.GetValue();
+    public override void TakeDamage(int damage){
+        if(damage >= 0){
+            damage -= armor.GetValue();
         //Debug.Log(damage);
-        damage = Mathf.Clamp(damage, 0, int.MaxValue);
+            damage = Mathf.Clamp(damage, 0, int.MaxValue);
+        }
+        print(damage);
         base.TakeDamage(damage);
         healthBar.SetHealth(CurrentHealth);
     }

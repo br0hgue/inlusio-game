@@ -23,7 +23,8 @@ public class Inventory : MonoBehaviour
     public OnItemChanged onItemChangedCallback;
     public inventSlot slotItem;
     public inventSlot currentItem;
-    public inventSlot oldSlotitem;
+    public MeshRenderer currentMeshItem;
+    public SkinnedMeshRenderer targetMesh;
 
     public int space = 20;
 
@@ -34,6 +35,21 @@ public class Inventory : MonoBehaviour
             currentItem.item.Use();
         }
     }
+
+    public void equipInHand (Item item){
+        MeshRenderer newMesh = Instantiate<MeshRenderer>(item.mesh);
+        newMesh.transform.parent = targetMesh.transform;
+        currentMeshItem = newMesh;
+        print("hmmmmm yes");
+
+    }
+
+    public void takOutOfHand(){
+        Destroy(currentMeshItem.gameObject);
+        print("hmmmmm no");
+    }
+
+
     public bool Add(Item _item, int _amount)
     {
         bool hasItem = false;

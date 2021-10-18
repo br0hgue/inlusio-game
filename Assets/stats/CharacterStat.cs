@@ -26,8 +26,10 @@ public class CharacterStat : MonoBehaviour
         }
     public virtual void TakeDamage(int damage)
     {
+        if(damage >= 0){
         damage -= armor.GetValue();
-        damage = Mathf.Clamp(damage, 0, int.MaxValue);
+        damage = Mathf.Clamp(damage, 0, int.MaxValue);}
+        
         CurrentHealth -= damage;
 
 
