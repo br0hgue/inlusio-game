@@ -32,9 +32,10 @@ public class CharacterStat : MonoBehaviour
         
         CurrentHealth -= damage;
 
-
+        if(CurrentHealth > MaxHealth){
+            CurrentHealth = MaxHealth;
+        }
         
-
         if (CurrentHealth <= 0)
         {
             Die();

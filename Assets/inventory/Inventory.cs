@@ -21,6 +21,11 @@ public class Inventory : MonoBehaviour
     
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
+
+    public delegate void ItemRemoved();
+    public ItemRemoved onitemremovedCallback;
+
+    Transform hand;
     public inventSlot slotItem;
     public inventSlot currentItem;
     public MeshRenderer currentMeshItem;
@@ -29,24 +34,48 @@ public class Inventory : MonoBehaviour
     public int space = 20;
 
     public List<inventSlot> items = new List<inventSlot>();
+    private void Start() {
+        hand = GameObject.Find("hand.R").transform;
+    }
     private void Update() {
          if(Input.GetMouseButtonDown(1)){
             //print("eggs");
             currentItem.item.Use();
+
+            
+            //print(currentItem.item.CheckHealth());
+            
         }
     }
 
     public void equipInHand (Item item){
-        MeshRenderer newMesh = Instantiate<MeshRenderer>(item.mesh);
-        newMesh.transform.parent = targetMesh.transform;
-        currentMeshItem = newMesh;
-        print("hmmmmm yes");
+        for (int i = 0; i < hand.childCount; i++){
+         Transform child = hand.GetChild(i);
+         //print(item);
+         if (child.name == item.name && child.GetComponent<MeshRenderer>() == true){
+             child.GetComponent<MeshRenderer>().enabled = true;
+         }
+        else if (child.name != item.name && child.GetComponent<MeshRenderer>() == true)
+             {child.GetComponent<MeshRenderer>().enabled = false;}
+        else if(child.GetComponent<MeshRenderer>() == false)
+            return;
+        }
+        //MeshRenderer newMesh = Instantiate<MeshRenderer>(item.mesh);
+        //newMesh.transform.parent = targetMesh.transform;
+        //currentMeshItem = newMesh;
+        //print("hmmmmm yes");
 
     }
 
     public void takOutOfHand(){
-        Destroy(currentMeshItem.gameObject);
-        print("hmmmmm no");
+        for (int i = 0; i < hand.childCount; i++){
+        Transform child = hand.GetChild(i);
+        if (child.GetComponent<MeshRenderer>() == true){
+             child.GetComponent<MeshRenderer>().enabled = false;
+             }
+        
+        }
+    
     }
 
 
@@ -81,7 +110,15 @@ public class Inventory : MonoBehaviour
     }
     public void Remove(Item item, int amount)
     {
-        items.Remove(new inventSlot(item, amount));     // Remove item from list
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].item.name == item.name){
+                items[i].amount -= 1;
+                if (items[i].amount == 0){
+                    items.RemoveAt(i);
+                }
+            }
+        }     // Remove item from list
 
         // Trigger callback
         if (onItemChangedCallback != null)

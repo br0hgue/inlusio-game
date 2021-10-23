@@ -50,7 +50,7 @@ public class thirdPersonMovement : MonoBehaviour
         
         if (GroundedPlayer && velocity.y < 0)
         {
-            velocity.y = -0f;
+            velocity.y = 0f;
             
         }
 
@@ -91,11 +91,11 @@ public class thirdPersonMovement : MonoBehaviour
             Debug.Log("play falling animation");
         } */
 
-        if (FallingPlayer && !GroundedPlayer && !Input.GetButtonDown("Jump") && velocity.y < 0f)
+        if (FallingPlayer && !GroundedPlayer && !Input.GetButtonDown("Jump") && velocity.y <= 0f)
         {
           animator.SetBool("isJumping", false);
           animator.SetBool("isFalling", true);
-            Debug.Log("falling ");
+            //Debug.Log("falling ");
         } else animator.SetBool("isFalling", false);
 
         velocity.y += gravity * Time.deltaTime;

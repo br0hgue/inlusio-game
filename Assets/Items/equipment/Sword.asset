@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   _object: {fileID: 8961172090150853852, guid: 15a3900c60e3d41d097440ead8f92399, type: 3}
+  mesh: {fileID: 0}
   item_type: 3
-  name: Sword
+  name: sword of cringe
   icon: {fileID: 21300000, guid: 20ba4ef76328f48eea1653fa02662395, type: 3}
   equipmentslot: 0
   damageMod: 5000

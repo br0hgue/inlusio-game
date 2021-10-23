@@ -12,7 +12,7 @@ public class inventorySlot : MonoBehaviour
     Item _item;
     Inventory inventory;
     public inventorySlot _slot;
-    public int scrollPosition;
+    int scrollPosition;
 
     Dictionary <inventSlot, GameObject> itemsDisplayed = new Dictionary<inventSlot, GameObject>();
 
@@ -22,22 +22,22 @@ public class inventorySlot : MonoBehaviour
     }
     private void Update() {
         //print(Mathf.RoundToInt(Input.mouseScrollDelta.y));
-        if(Mathf.RoundToInt(Input.mouseScrollDelta.y) >= 1){
+        if((Input.mouseScrollDelta.y) >= 1){
             scrollPosition++;
             if(scrollPosition >= 7){
                 scrollPosition = 1;
             }
-            Selected();
+            
             
         }
-        if(Mathf.RoundToInt(Input.mouseScrollDelta.y) <= -1){
+        if((Input.mouseScrollDelta.y) <= -1){
             scrollPosition--;
             if(scrollPosition <= 0){
                 scrollPosition = 6;
             }
-         Selected();
+         
         }
-
+        Selected();
        
         
     }
@@ -50,26 +50,27 @@ public class inventorySlot : MonoBehaviour
             if (item != null){
                 item.item.inHand();
 
-                if(item.item.item_type != 3){
+                Inventory.instance.currentItem = item;
+
+                if(item.item.item_type != 3 && Inventory.instance.currentItem != item){
                     Inventory.instance.currentItem.item.Unhand();
                     print("1");
                 }
-                Inventory.instance.currentItem = item;
                 //print(olditem);
             } else if (item == null)
             {
-                print("2");
-                if (Inventory.instance.currentItem == null){
-                    return;
+                //print("2");
+                if (Inventory.instance.currentItem != null){
+                    Inventory.instance.currentItem.item.Unhand();
+                    Inventory.instance.currentItem = null;
                     }
                 //remove previous item
                 
-                Inventory.instance.currentItem.item.Unhand();
                 
-                Inventory.instance.currentItem = null;
                     
 
             }
+            else return;
         } else {
             var image = _slot.GetComponentInChildren<Image>();
             image.rectTransform.sizeDelta = new Vector2(60,60);

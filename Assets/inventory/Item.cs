@@ -13,14 +13,16 @@ public class Item : ScriptableObject
     new public string name = "new item";
     public Sprite icon = null;
 
+   
+
     public virtual void inHand(){
-        //Inventory.instance.equipInHand(this);
+        Inventory.instance.equipInHand(this);
         //when selected in hotbar put the item in the hand
-        Debug.Log("in hand");
+        //Debug.Log("in hand");
     }
 
     public virtual void Unhand(){
-        //Inventory.instance.takOutOfHand();
+        Inventory.instance.takOutOfHand();
         //take out the item that was previously
         //Debug.Log("took out");
     }
@@ -34,5 +36,8 @@ public class Item : ScriptableObject
         Inventory.instance.Remove(this, 1);
     }
 
+    public virtual bool CheckHealth(){
+        return false;
+    }
 
 }

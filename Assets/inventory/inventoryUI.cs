@@ -48,6 +48,8 @@ public class inventoryUI : MonoBehaviour
                 if (inventory.items[i].amount >1){
                 slots[i].GetComponentInChildren<TextMeshProUGUI>().enabled = true;
                 slots[i].GetComponentInChildren<TextMeshProUGUI>().text = inventory.items[i].amount.ToString("n0");}
+                else if (inventory.items[i].amount <= 1){
+                        slots[i].GetComponentInChildren<TextMeshProUGUI>().enabled = false;}
             } else
             {
                 slots[i].ClearSlot();
@@ -55,6 +57,16 @@ public class inventoryUI : MonoBehaviour
             }
         }
     }
+    void UpdateUIRemove(){
+        for (int i = 0; i < slots.Length; i++)
+        {
+           if(inventory.items[i].amount > 1){
+               slots[i].GetComponentInChildren<TextMeshProUGUI>().text = inventory.items[i].amount.ToString("n0");
+           } else {slots[i].GetComponentInChildren<TextMeshProUGUI>().enabled = false;
+           }
+        }
+    }
+     
     
 }
     

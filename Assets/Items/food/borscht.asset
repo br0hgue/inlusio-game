@@ -7,13 +7,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b37ce273346be4802bb63cbb12f826f6, type: 3}
   m_Name: borscht
   m_EditorClassIdentifier: 
-  _object: {fileID: 8277450224254446399, guid: b176d501ddec349a2b2b0c2fef0bc65a, type: 3}
-  itemAmount: 1
-  name: "b\xF6rshct"
+  _object: {fileID: 7089102068461441059, guid: 359f9ec779fcf4942993e52d113bf212, type: 3}
+  mesh: {fileID: 0}
+  item_type: 1
+  name: "b\xF6rscht"
   icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   healthRestored: 50
+  playerHealth: {fileID: 919132149155446097, guid: 864b02894903e4f5eadd7243e8b26c4f,
+    type: 3}

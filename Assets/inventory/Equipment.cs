@@ -14,6 +14,7 @@ public class Equipment : Item
 
     public override void inHand()
     {
+        Inventory.instance.equipInHand(this);
        // put in hand
         if (this.equipmentslot == EquipmentSlot.Weapon){
             EquipmentManager.instance.Equip(this);
@@ -23,11 +24,11 @@ public class Equipment : Item
     }
 
     public override void Unhand()
-    {
+    {   
         base.Unhand();
         if (this.equipmentslot == EquipmentSlot.Weapon){
             EquipmentManager.instance.Unequip(0);
-            Debug.Log("unhanded");
+            //Debug.Log("unhanded");
 
         }
     }

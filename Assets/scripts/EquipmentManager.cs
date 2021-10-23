@@ -80,7 +80,7 @@ public class EquipmentManager : MonoBehaviour
                 currentEquipment[slotIndex] = null;
                 if(oldItem.equipmentslot == EquipmentSlot.Weapon){
                 
-                print("the danger stick is no longer equipped");
+                //print("the danger stick is no longer equipped");
         }
 
             }
