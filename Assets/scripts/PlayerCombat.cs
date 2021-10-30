@@ -11,7 +11,7 @@ public class PlayerCombat : MonoBehaviour
     Animator animator;
     //bool hasAttacked;
     //float attackSpeed = 1f;
-    float attackCooldown = 1.4f;
+    public float attackCooldown = 1.4f;
     
     void Start()
     {
@@ -27,10 +27,10 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && attackCooldown <= 0f && !EventSystem.current.IsPointerOverGameObject())
         {
-            Invoke("Attack", .33f);
+            Invoke("Attack", .43f);
             //hasAttacked = false;
             animator.SetBool("isAttacking", true);
-            attackCooldown = .7f;
+            attackCooldown = 1.4f;
         }
 
         if (attackCooldown <= .5f){

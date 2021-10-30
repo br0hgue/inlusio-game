@@ -11,9 +11,10 @@ public class damnedStats : CharacterStat
     public GameObject enemy;
     public GameObject drop;
     public ParticleSystem particles;
-
+    bool isdead;
     public override void Awake()
     {
+        isdead = false;
         base.Awake();
         animator = gameObject.GetComponent<Animator>();
         //agent = enemy.GetComponent<NavMeshAgent>();
@@ -22,8 +23,12 @@ public class damnedStats : CharacterStat
 
     public override void TakeDamage(int damage)
     {
+        animator.SetBool("isDamaged", true);
+        enemy.GetComponent<enemyScripts>().damageTime = 1.5f;
+        if(!isdead){
         base.TakeDamage(damage);
        Destroy(Instantiate(particles.gameObject, enemy.transform.position + Vector3.up, Quaternion.Euler(270,0,0)) as GameObject, 2f);
+       }
     }
     public override void Die()
     {
@@ -31,6 +36,10 @@ public class damnedStats : CharacterStat
         //base.Die();
         animator.SetBool("isDying", true);
         Invoke("spawnDrop", 0.5f);
+        isdead = true;
+        Destroy(Instantiate(particles.gameObject, enemy.transform.position + Vector3.up, Quaternion.Euler(270,0,0)) as GameObject, 2f);
+
+        
         Destroy(gameObject, 3f);
         
     }

@@ -14,10 +14,15 @@ public class gameManager : MonoBehaviour
         }
         Restart();
     }
+    private void Start() {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     private void Update() {
         if (!GameObject.Find("Player")){
             Restart();
         }
+
+        
     }
     public void WinGame()
     {

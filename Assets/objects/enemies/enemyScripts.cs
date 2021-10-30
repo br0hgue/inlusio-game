@@ -6,13 +6,14 @@ public class enemyScripts : MonoBehaviour
 {
     public float attackCooldown = 1f;
     public float visionRads = 10f;
-    public float spottime;
+    float spottime;
+    public float damageTime;
     Transform target;
     CharacterStat enemy;
     NavMeshAgent agent;
     Animator animator;
     bool IsPlayerAlive = true;
-    public bool spotted;
+    bool spotted;
 
     void Start()
     {
@@ -27,10 +28,16 @@ public class enemyScripts : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //if damaged wait to attack, set by TakeDamage
+        damageTime -= Time.deltaTime;
+        if(damageTime < 0){
+            animator.SetBool("isDamaged", false);
+        }
+
         if (spottime < 0){
             spotted = false;
         } else spotted = true;
+
 
         spottime -= Time.deltaTime;
       
@@ -43,63 +50,60 @@ public class enemyScripts : MonoBehaviour
             return;
         }
 
-        //print(spotted);
+        
         
         float distance = Vector3.Distance(target.position, transform.position);
 
         attackCooldown -= Time.deltaTime;
-
+        //check if ended attack
         if (attackCooldown < 1f && attackCooldown > 0f ){
             animator.SetBool("isAttacking", false);
-            //print("yes");
+            
         }
         if (distance <= visionRads)
         {
-            //agent.isStopped = false;
-
-            var heading = target.position - enemy.transform.position;
-            float dot = Vector3.Dot(heading, enemy.transform.position);
             
-            //if (dot >= .7f){
+            //was going to do a spot thing but didnt work
+            //var heading = target.position - enemy.transform.position;
+            //float dot = Vector3.Dot(heading, enemy.transform.position);
+            
+           
             if(!spotted){
-            //spotted = true;
             spottime = 30f;
             }
+            
             agent.SetDestination(target.position);
             animator.SetBool("isMoving", true);
 
             if (distance <= agent.stoppingDistance)
             {
                 animator.SetBool("isMoving", false);
-                if (attackCooldown < 0f)
-                    Invoke("Attack", 0);
-                    //animator.SetBool("isattacking", false);
-                    //print (attackCooldown);
+                if (attackCooldown < 0f && !animator.GetBool("isDamaged"))
+                    {
+                        Invoke("Attack", 0);
+                    }
+                    
             }
             
             
         } else if (spotted && distance > visionRads){
-            //agent.isStopped = false;
+            
             agent.SetDestination(target.position);
             animator.SetBool("isMoving", true);
-            //print(spotted);
+            
             if (distance <= agent.stoppingDistance)
             {
                 animator.SetBool("isMoving", false);
                 if (attackCooldown < 0f)
                     Invoke("Attack",0);
-                    //animator.SetBool("isattacking", false);
-                    //print (attackCooldown);
+                    
 
             }
         } else animator.SetBool("isMoving", false);
 
         if(animator.GetBool("isDying")){
             CancelInvoke();
-        }
-        //agent.isStopped = true;
-
-        
+        } 
     }
     void Attack()
     {
@@ -110,7 +114,6 @@ public class enemyScripts : MonoBehaviour
     }
 
     void TruAttack(){
-        //CharacterStat character = GetComponent<CharacterStat>();
         int damage = enemy.damage.GetValue();
         PlayerStats playerhealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         playerhealth.TakeDamage(damage);

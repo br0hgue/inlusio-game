@@ -3,7 +3,11 @@ using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
 {
-    
+    public GameObject thisObject;
+
+    private void Update() {
+        thisObject.transform.Rotate(Vector3.up, Space.World);
+    }
     public Item item;
     void OnTriggerEnter(Collider collider)
     {

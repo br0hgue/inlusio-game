@@ -16,6 +16,7 @@ public class thirdPersonMovement : MonoBehaviour
     public float jumpHeight = 2.0f;
     public  float gravity = -9.81f;
     public Transform cam;
+    public Camera _camera;
     public Transform groundcheck;
     public LayerMask groundlayer;
     public float grounddistance;
@@ -25,6 +26,8 @@ public class thirdPersonMovement : MonoBehaviour
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        _camera.fieldOfView = 30f;
+        
     }
 
     void Update()

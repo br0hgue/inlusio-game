@@ -41,10 +41,11 @@ public class Inventory : MonoBehaviour
          if(Input.GetMouseButtonDown(1)){
             //print("eggs");
             currentItem.item.Use();
+        }
 
-            
-            //print(currentItem.item.CheckHealth());
-            
+        if(Input.GetKeyDown(KeyCode.Q)){
+            Instantiate(currentItem.item._object, PlayerManager.instance.player.transform.position + Vector3.forward, Quaternion.identity);
+            Remove(currentItem.item, 1);
         }
     }
 
