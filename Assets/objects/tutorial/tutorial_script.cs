@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -12,84 +12,100 @@ public class tutorial_script : MonoBehaviour
     }
 
     Animator animator;
-    public int phase;
-    public Camera cam;
+    public int phase = 1;
     public Transform tutText;
+    Inventory inventory;
     bool isMoved;
+    bool pickedItem;
 
     private void Start() {
+        inventory = Inventory.instance;
         isMoved = false;
-        animator = tutText.GetComponentInChildren<Animator>();
+        pickedItem = false;
+        animator = tutText.GetComponentInChildren<Animator>(); 
+        inventory.onItemChangedCallback += AdquiredItem;
        for (int i = 0; i < tutText.childCount; i++)
         {
-            Transform child = tutText.GetChild(i + 2);
-            child.GetComponent<TextMeshProUGUI>().enabled = false;
+            //Transform child = tutText.GetChild(i + 2);
+            //child.GetComponent<TextMeshProUGUI>().enabled = false;
         }
     }
 
-    private void Update() {
-        phase =  animator.GetInteger("tut_phase");
-        bool animTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime >1 && !animator.IsInTransition(0);
-        //string animName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
-        //print(animTime);
-        if (animTime && animator.GetCurrentAnimatorStateInfo(0).IsName("animtest")){
-            CheckText();
-        }
-        else if (animTime && animator.GetCurrentAnimatorStateInfo(0).IsName("wasd_anim")){
-            animator.SetBool("phase_2", true);
-            print(animator.GetBool("phase_2"));
-            animator.SetInteger("tut_phase", 2);
-            CheckText();
-        }
-        else if (animTime && animator.GetCurrentAnimatorStateInfo(0).IsName("item_anim")){
-            animator.SetInteger("tut_phase", 3);
-            CheckText();
-        }
-        else if (animTime && animator.GetCurrentAnimatorStateInfo(0).IsName("scroll_anim")){
-            animator.SetInteger("tut_phase", 4);
-            CheckText();
-        }
-        else if (animTime && animator.GetCurrentAnimatorStateInfo(0).IsName("damage_anim")){
-            animator.SetInteger("tut_phase", 5);
-            CheckText();
-        }
-        else if (animTime && animator.GetCurrentAnimatorStateInfo(0).IsName("attack_anim")){
-            animator.SetInteger("tut_phase", 6);
-            CheckText();
-        }
-        else if (animTime && animator.GetCurrentAnimatorStateInfo(0).IsName("use_anim")){
-            animator.SetInteger("tut_phase", 7);
-            CheckText();
-        }
+    private void Update(){
 
-        
+            bool animTime= animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0) && animator.GetCurrentAnimatorStateInfo(0).IsName("animtest");
+            if(animTime && phase < 1){
+                phase +=1;
+            }
 
-        /*bool Movething = Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0;
-        if(!isMoved && Movething && phase == 1){
-            isMoved = true;
-            Ping();
+            print(animTime);
+            //Debug.Log(phase);
             
-        }*/
-    }
+            if(Input.GetAxisRaw("Vertical") != 0|| Input.GetAxisRaw("Horizontal") !=0){
+                isMoved = true;
+            }
+            //Debug.Log(animTime);
 
-    public void Ping(){
-       phase =  animator.GetInteger("tut_phase");
-       animator.SetInteger("tut_phase", phase + 1);
-       CheckText();
+            //print(isMoved);
 
-       //Debug.Log(phase);
-    }
+            if(animTime){
+                switch (phase)
+            {
+                case 1:
+                if(isMoved){
+                    phase+=1;
+                    break;
+                }
 
-    void CheckText(){
-        print(phase);
-        for (int i = 0; i < tutText.childCount; i++)
-        {
-            Transform child = tutText.GetChild(phase + 1);
+                tutText.GetComponentInChildren<TextMeshProUGUI>().text = "use <sprite index= 1> to move";
+                animator.Play("animtest", 0, 0f);
+                //print("1");
+                break;
 
-            Transform oldChild = tutText.GetChild(phase);
+                case 2:
+                tutText.GetComponentInChildren<TextMeshProUGUI>().text = "move to the item to pick it up";
+                animator.Play("animtest", 0,0f);
+                break;
 
-            oldChild.GetComponent<TextMeshProUGUI>().enabled= false;
-            child.GetComponent<TextMeshProUGUI>().enabled = true;
+                case 3:
+                tutText.GetComponentInChildren<TextMeshProUGUI>().text = "use the Mouse Scroll Wheel <sprite index= 3> to chose an item in the hotbar";
+                animator.Play("animtest", 0,0f);
+                phase+=1;
+                break;
+
+                case 4:
+                tutText.GetComponentInChildren<TextMeshProUGUI>().text = "use the rock <sprite index= 5> to deal more damage";
+                animator.Play("animtest", 0,0f);
+                phase+=1;
+                break; 
+
+                case 5:
+                tutText.GetComponentInChildren<TextMeshProUGUI>().text = null;
+                break;
+
+                case 6:
+                tutText.GetComponentInChildren<TextMeshProUGUI>().text = "Press Left Mouse Button <sprite index= 4> to attack";
+                phase +=1;
+                break;
+
+                case 7:
+                tutText.GetComponentInChildren<TextMeshProUGUI>().text = null;
+                break;
+            }
         }
-    }
+
+            //if(animTime && Input.anyKeyDown){
+              //  phase +=1;
+            //}
+
+        }
+
+    void AdquiredItem(){
+            if(!pickedItem){
+                phase+=1;
+                pickedItem = true;
+            }
+        }
+    
 }
+      
