@@ -29,11 +29,10 @@ public class thirdPersonMovement : MonoBehaviour
         _camera.fieldOfView = 30f;
         
     }
-
-    void Update()
+    void FixedUpdate()
     {
         
-
+        if(!EventSystem.current.IsPointerOverGameObject()){
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         
@@ -106,5 +105,7 @@ public class thirdPersonMovement : MonoBehaviour
              //{Debug.Log(velocity.y);}
 
         controller.Move(velocity * Time.deltaTime);
+    }
+
     }
 }

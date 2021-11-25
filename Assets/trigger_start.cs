@@ -13,11 +13,17 @@ public class trigger_start : trigger_scripts
        has_entered = false;
    }
 
-   private void OnTriggerEnter(Collider other) {
+private void Update() {
+   }
+
+
+void OnTriggerEnter(Collider other) {
        if(other.CompareTag("Player") && !has_entered){
         has_entered = true;
-         tutorial_script.instance.phase +=1;
+        print("1");
+         tutorial_script.instance.NextPhase();
        }
        
-   }
+    }
+
 }

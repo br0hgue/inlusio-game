@@ -33,12 +33,12 @@ public class tutorial_script : MonoBehaviour
 
     private void Update(){
 
-            bool animTime= animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0) && animator.GetCurrentAnimatorStateInfo(0).IsName("animtest");
-            if(animTime && phase < 1){
-                phase +=1;
+            
+            if(AnimTime() && phase < 1){
+                NextPhase();
             }
 
-            print(animTime);
+            //print(AnimTime());
             //Debug.Log(phase);
             
             if(Input.GetAxisRaw("Vertical") != 0|| Input.GetAxisRaw("Horizontal") !=0){
@@ -48,12 +48,12 @@ public class tutorial_script : MonoBehaviour
 
             //print(isMoved);
 
-            if(animTime){
+            if(AnimTime()){
                 switch (phase)
             {
                 case 1:
                 if(isMoved){
-                    phase+=1;
+                    NextPhase();
                     break;
                 }
 
@@ -68,29 +68,42 @@ public class tutorial_script : MonoBehaviour
                 break;
 
                 case 3:
-                tutText.GetComponentInChildren<TextMeshProUGUI>().text = "use the Mouse Scroll Wheel <sprite index= 3> to chose an item in the hotbar";
+                tutText.GetComponentInChildren<TextMeshProUGUI>().text = "use the Mouse Scroll Wheel <sprite index= 4> to chose an item in the hotbar";
                 animator.Play("animtest", 0,0f);
-                phase+=1;
+                NextPhase();
                 break;
 
                 case 4:
                 tutText.GetComponentInChildren<TextMeshProUGUI>().text = "use the rock <sprite index= 5> to deal more damage";
                 animator.Play("animtest", 0,0f);
-                phase+=1;
+                NextPhase();
                 break; 
 
                 case 5:
-                tutText.GetComponentInChildren<TextMeshProUGUI>().text = null;
+                tutText.GetComponentInChildren<TextMeshProUGUI>().text = "";
                 break;
 
                 case 6:
-                tutText.GetComponentInChildren<TextMeshProUGUI>().text = "Press Left Mouse Button <sprite index= 4> to attack";
-                phase +=1;
+                tutText.GetComponentInChildren<TextMeshProUGUI>().text = "Press Left Mouse Button <sprite index= 3> to attack";
+                pickedItem = false;
+                animator.Play("animtest", 0,0f);
+                NextPhase();
                 break;
 
                 case 7:
-                tutText.GetComponentInChildren<TextMeshProUGUI>().text = null;
+                tutText.GetComponentInChildren<TextMeshProUGUI>().text = "";
                 break;
+
+                case 8:
+                tutText.GetComponentInChildren<TextMeshProUGUI>().text = "Press Right Mouse Button <sprite index= 2> to use the item";
+                animator.Play("animtest", 0,0f);
+                NextPhase();
+                break;
+
+                case 9:
+                tutText.GetComponentInChildren<TextMeshProUGUI>().text = "";
+                break;
+
             }
         }
 
@@ -106,6 +119,16 @@ public class tutorial_script : MonoBehaviour
                 pickedItem = true;
             }
         }
+
+    public void NextPhase(){
+        //print("2");
+        phase +=1;
+    }
+
+    bool AnimTime(){
+        return animator.GetCurrentAnimatorStateInfo(0).normalizedTime >1 && !animator.IsInTransition(0) && animator.GetCurrentAnimatorStateInfo(0).IsName("animtest");
+
+    }
     
 }
       

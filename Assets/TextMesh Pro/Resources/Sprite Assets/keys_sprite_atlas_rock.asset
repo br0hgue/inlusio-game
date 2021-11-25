@@ -48,7 +48,7 @@ MonoBehaviour:
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 0
-    m_Scale: 3
+    m_Scale: 4.23
     m_Name: keys_sprite_atlas_rock
     m_HashCode: -783188180
   - m_ElementType: 2

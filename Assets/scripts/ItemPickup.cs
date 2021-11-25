@@ -16,9 +16,9 @@ public class ItemPickup : MonoBehaviour
             PickupItem();
         }
         void PickupItem()
-        {
+        {   
             bool wasPicked = Inventory.instance.Add(item, 1);
-
+            print(wasPicked);
             if (wasPicked){
                 //Debug.Log("Picked up " + item.name);
                 Destroy(gameObject);

@@ -15,10 +15,13 @@ public class gameManager : MonoBehaviour
         Restart();
     }
     private void Start() {
-        Cursor.lockState = CursorLockMode.Locked;
+        if(SceneManager.GetActiveScene().name == "scene 2"){
+        Cursor.lockState = CursorLockMode.Locked;} else {
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
     private void Update() {
-        if (!GameObject.Find("Player")){
+        if (!GameObject.Find("Player") && SceneManager.GetActiveScene().name != "scene 1"){
             Restart();
         }
 
@@ -29,8 +32,14 @@ public class gameManager : MonoBehaviour
         Debug.Log("yay you win");
     }
     public void Restart(){
-        SceneManager.LoadScene("scene 1");
+        SceneManager.LoadScene("scene 2");
 
     }
+    public void MainMenu(){
+        SceneManager.LoadScene("scene 1");
+    }
+    public void Quit(){
+         Application.Quit();
+     }
     
 }
