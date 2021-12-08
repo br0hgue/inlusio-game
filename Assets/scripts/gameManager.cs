@@ -16,8 +16,11 @@ public class gameManager : MonoBehaviour
     }
     private void Start() {
         if(SceneManager.GetActiveScene().name == "scene 2"){
-        Cursor.lockState = CursorLockMode.Locked;} else {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        } else {
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
     private void Update() {

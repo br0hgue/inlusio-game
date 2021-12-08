@@ -16,6 +16,6 @@ MonoBehaviour:
   mesh: {fileID: 0}
   item_type: 1
   name: crystal_food
-  icon: {fileID: 21300000, guid: 2673491a141164fa2ab041f757ed931a, type: 3}
+  icon: {fileID: 21300000, guid: 764e20ae260b8494d934957b5872d750, type: 3}
   healthRestored: 10
   playerHealth: {fileID: 0}

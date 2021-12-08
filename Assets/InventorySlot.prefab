@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22700001, g: 0.159383, b: 0.10625532, a: 0.16470589}
+  m_Color: {r: 0.106000006, g: 0.106000006, b: 0.106000006, a: 0.3137255}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -131,7 +131,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 2255630318010889916}
   _slot: {fileID: 0}
-  scrollPosition: 0
 --- !u!1 &2198657281176625377
 GameObject:
   m_ObjectHideFlags: 0

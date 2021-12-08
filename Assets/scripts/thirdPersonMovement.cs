@@ -42,7 +42,7 @@ public class thirdPersonMovement : MonoBehaviour
 	//Don't forget to add an isMoving bool inside your Animator
         animator.SetBool("isMoving", isWalking);
 
-        GroundedPlayer = Physics.CheckSphere(groundcheck.position, grounddistance, groundlayer);
+        GroundedPlayer = Physics.CheckSphere(groundcheck.position, grounddistance, groundlayer) && velocity.y < 0;
 
         FallingPlayer = Physics.CheckSphere(groundcheck.position, grounddistance + 0.2f, groundlayer);
         
